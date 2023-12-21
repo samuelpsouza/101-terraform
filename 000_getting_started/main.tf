@@ -1,32 +1,8 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-variable "instance_type" {
-  type    = string
-  default = "t2.nano"
-}
-
 locals {
   customer_name = "ssouza"
   project_name = "terraform-certification"
 }
 
-provider "aws" {
-  profile = "default"
-  region  = "us-east-1"
-}
-
-provider "aws" {
-  profile = "default"
-  region = "eu-west-1"
-  alias = "eu"
-}
 
 resource "aws_instance" "app_server" {
   ami           = "ami-079db87dc4c10ac91"
@@ -38,9 +14,6 @@ resource "aws_instance" "app_server" {
 
 }
 
-output "public_ip" {
-  value = aws_instance.app_server.public_ip
-}
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
