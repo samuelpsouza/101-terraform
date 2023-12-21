@@ -8,8 +8,12 @@ terraform {
 }
 
 variable "instance_type" {
-  type = string
+  type    = string
   default = "t2.nano"
+}
+
+locals {
+  customer_name = "ssouza"
 }
 
 provider "aws" {
@@ -22,7 +26,7 @@ resource "aws_instance" "app_server" {
   instance_type = var.instance_type
 
   tags = {
-    Name = "app_server"
+    Name = "app_server_${local.customer_name}"
   }
 
 }
