@@ -7,14 +7,19 @@ terraform {
   }
 }
 
+variable "instance_type" {
+  type = string
+  default = "t2.nano"
+}
+
 provider "aws" {
   profile = "default"
   region  = "us-east-1"
 }
 
 resource "aws_instance" "app_server" {
-  ami           = "ami"
-  instance_type = "t2.micro"
+  ami           = "ami-079db87dc4c10ac91"
+  instance_type = var.instance_type
 
   tags = {
     Name = "app_server"
